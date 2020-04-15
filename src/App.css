@@ -1,0 +1,30 @@
+
+.Cuadro {
+  display: inline-block;
+}
+
+.Centrado {
+  margin: 0 auto;
+}
+  
+.Tabla1 {
+  margin: 2%;
+  margin-left: 20%;
+  height: 15%;
+  width: 15%;
+  float: left;
+}
+.Tabla2 {
+  margin: 1%;
+  margin-left: 25%;
+  height: 15%;
+  width: 15%;
+  float: left;
+}
+
+#tables{
+  margin: 10% 0;
+}
+
+
+
