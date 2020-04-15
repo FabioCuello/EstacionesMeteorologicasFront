@@ -62,7 +62,7 @@ function App() {
     let VXvector = []
     var hoy = new Date();
     hoy = hoy.getDay()
-    const dataPointsJson = await fetch('http://34.219.130.100:3001/PotenciaEmuladorUniGRID')
+    const dataPointsJson = await fetch('http://34.219.130.100:3001/emuEnergy')
     const dataPoints = await dataPointsJson.json()
     for (var i = 0; i <= hoy; i++) {
       VXvector.push({
