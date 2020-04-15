@@ -13,7 +13,7 @@ function App() {
   // DATA
   async function UpdateCharR() {
     let UpdateCharRVector = []
-    const dataPointsJson = await fetch("http://localhost:3001/radiation")
+    const dataPointsJson = await fetch("http://34.219.130.100:3001/radiation")
     const dataPoints = await dataPointsJson.json()
     dataPoints.map((data) => {
       UpdateCharRVector.push({
@@ -28,7 +28,7 @@ function App() {
 
   async function UpdateCharV() {
     let UpdateCharVVector = []
-    const dataPointsJson = await fetch("http://localhost:3001/wind")
+    const dataPointsJson = await fetch("http://34.219.130.100:3001/wind")
     const dataPoints = await dataPointsJson.json()
     dataPoints.map((data) => {
       UpdateCharVVector.push({
@@ -45,7 +45,7 @@ function App() {
     let HSPsemanalVector = []
     var hoy = new Date();
     hoy = hoy.getDay()
-    const dataPointsJson = await fetch('http://localhost:3001/PanelEnergy')
+    const dataPointsJson = await fetch('http://34.219.130.100:3001/PanelEnergy')
     const dataPoints = await dataPointsJson.json()
     for (var i = 0; i <= hoy; i++) {
       HSPsemanalVector.push({
@@ -62,7 +62,7 @@ function App() {
     let VXvector = []
     var hoy = new Date();
     hoy = hoy.getDay()
-    const dataPointsJson = await fetch('http://localhost:3001/PotenciaEmuladorUniGRID')
+    const dataPointsJson = await fetch('http://34.219.130.100:3001/PotenciaEmuladorUniGRID')
     const dataPoints = await dataPointsJson.json()
     for (var i = 0; i <= hoy; i++) {
       VXvector.push({
