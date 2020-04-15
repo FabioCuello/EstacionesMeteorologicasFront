@@ -64,6 +64,9 @@ function App() {
     hoy = hoy.getDay()
     const dataPointsJson = await fetch('http://34.219.130.100:3001/emuEnergy')
     const dataPoints = await dataPointsJson.json()
+    // --------
+    localStorage.setItem('PV', JSON.stringify(dataPoints));
+    // --------
     for (var i = 0; i <= hoy; i++) {
       VXvector.push({
         label: dias[i],
@@ -103,7 +106,7 @@ function App() {
             <Graphic dataPoints={data.radiation} axisXTittle="Hora" axisYTittle="Radiación Solar (W/m²)" titleText="Radiación" type="area" toolTipContent="Radiación: {y}" />
           </div>
           <div className="row">
-            <Graphic dataPoints={data.HSPweek} axisXTittle="Días" axisYTittle="kWh" titleText="Energía Estimada Panel Bloque C" type="column" toolTipContent="{label}: {y}" />
+            <Graphic dataPoints={data.HSPweek} axisXTittle="Días" axisYTittle="Wh" titleText="Energía Estimada Panel Bloque C" type="column" toolTipContent="{label}: {y}" />
             <Graphic dataPoints={data.VX} axisXTittle="Días" axisYTittle="kWh" titleText="Energía Estimada Emulador WT UniGRID" type="column" toolTipContent="{label}: {y}" />
           </div>
         </section>

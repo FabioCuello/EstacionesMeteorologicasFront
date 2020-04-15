@@ -92,7 +92,6 @@ class HPS extends Component {
                     total = Number(total.toFixed(3));
                     solar = Number(solar.toFixed(3));
                     eolico = Number(eolico.toFixed(3));
-                    console.log(total, solar, eolico)
                     document.getElementById("demo").innerHTML = HSP + " kWh/m²";
                     document.getElementById("total").innerHTML = total + " Wh/d";
                     document.getElementById("solar").innerHTML = solar + "%";
