@@ -13,32 +13,42 @@ function App() {
   // DATA
   async function UpdateCharR() {
     let UpdateCharRVector = []
-    const dataPointsJson = await fetch("http://34.219.130.100:3001/radiation")
-    const dataPoints = await dataPointsJson.json()
-    dataPoints.map((data) => {
-      UpdateCharRVector.push({
-        x: new Date(data.x),
-        y: data.y
+    try {
+      const dataPointsJson = await fetch("http://34.219.130.100:3001/radiation")
+      const dataPoints = await dataPointsJson.json()
+      dataPoints.map((data) => {
+        UpdateCharRVector.push({
+          x: new Date(data.x),
+          y: data.y
+        })
       })
-    })
-    setData(prev => {
-      return { ...prev, radiation: UpdateCharRVector }
-    })
+      setData(prev => {
+        return { ...prev, radiation: UpdateCharRVector }
+      })
+    }
+    catch (error) {
+      console.log("Un error ha ocurrido Actualizando Gráfica de radiación: " + error)
+    }
   }
 
   async function UpdateCharV() {
     let UpdateCharVVector = []
-    const dataPointsJson = await fetch("http://34.219.130.100:3001/wind")
-    const dataPoints = await dataPointsJson.json()
-    dataPoints.map((data) => {
-      UpdateCharVVector.push({
-        x: new Date(data.x),
-        y: data.y
+    try {
+      const dataPointsJson = await fetch("http://34.219.130.100:3001/wind")
+      const dataPoints = await dataPointsJson.json()
+      dataPoints.map((data) => {
+        UpdateCharVVector.push({
+          x: new Date(data.x),
+          y: data.y
+        })
+      });
+      setData(prev => {
+        return { ...prev, wind: UpdateCharVVector }
       })
-    });
-    setData(prev => {
-      return { ...prev, wind: UpdateCharVVector }
-    })
+    }
+    catch (error) {
+      console.log("Un error ha ocurrido Actualizando Gráfica de Viento: " + error)
+    }
   }
 
   async function HSPsemanal() {
@@ -80,12 +90,12 @@ function App() {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      UpdateCharV()
-      HSPsemanal()
-      VX()
-      UpdateCharR()
-    }, 1);
+    // update firt time all the functions to display the graphics
+    UpdateCharV()
+    HSPsemanal()
+    VX()
+    UpdateCharR()
+    // set interval to update graphics
     setInterval(() => {
       UpdateCharV()
       HSPsemanal()
@@ -93,7 +103,6 @@ function App() {
       UpdateCharR()
     }, 15000);
   }, [])
-
 
   return (
     <div className="principal" >
