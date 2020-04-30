@@ -6,10 +6,10 @@ function table() {
     return <section id="tables">
         <div className="row">
             <div className="col-lg-6">
-                <Details />
+                <HPS />
             </div>
             <div className="col-lg-6">
-                <HPS />
+                <Details />
             </div>
         </div>
     </section>

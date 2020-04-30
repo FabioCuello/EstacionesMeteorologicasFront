@@ -14,7 +14,7 @@ function App() {
   async function UpdateCharR() {
     let UpdateCharRVector = []
     try {
-      const dataPointsJson = await fetch("http://34.219.130.100:3001/radiation")
+      const dataPointsJson = await fetch("http://34.219.130.100:3001/api/data/radiation")
       const dataPoints = await dataPointsJson.json()
       dataPoints.map((data) => {
         UpdateCharRVector.push({
@@ -34,7 +34,7 @@ function App() {
   async function UpdateCharV() {
     let UpdateCharVVector = []
     try {
-      const dataPointsJson = await fetch("http://34.219.130.100:3001/wind")
+      const dataPointsJson = await fetch("http://34.219.130.100:3001/api/data/wind")
       const dataPoints = await dataPointsJson.json()
       dataPoints.map((data) => {
         UpdateCharVVector.push({
@@ -55,7 +55,7 @@ function App() {
     let HSPsemanalVector = []
     var hoy = new Date();
     hoy = hoy.getDay()
-    const dataPointsJson = await fetch('http://34.219.130.100:3001/PanelEnergy')
+    const dataPointsJson = await fetch('http://34.219.130.100:3001/api/data/PanelEnergy')
     const dataPoints = await dataPointsJson.json()
     for (var i = 0; i <= hoy; i++) {
       HSPsemanalVector.push({
@@ -63,19 +63,19 @@ function App() {
         y: dataPoints[i]
       });
     }
-    setData(prev => {
-      return { ...prev, HSPweek: HSPsemanalVector }
-    })
+    setData(prev => { return { ...prev, HSPweek: HSPsemanalVector } })
   }
 
   async function VX() {
     let VXvector = []
     var hoy = new Date();
     hoy = hoy.getDay()
-    const dataPointsJson = await fetch('http://34.219.130.100:3001/emuEnergy')
+    const dataPointsJson = await fetch('http://34.219.130.100:3001/api/data/emuEnergy')
     const dataPoints = await dataPointsJson.json()
+
     // --------
     localStorage.setItem('PV', JSON.stringify(dataPoints));
+
     // --------
     for (var i = 0; i <= hoy; i++) {
       VXvector.push({
@@ -83,18 +83,17 @@ function App() {
         y: dataPoints[i]
       });
     }
-    setData(prev => {
-      console.log(VXvector)
-      return { ...prev, VX: VXvector }
-    })
+    setData(prev => { return { ...prev, VX: VXvector } })
   }
 
   useEffect(() => {
+
     // update firt time all the functions to display the graphics
     UpdateCharV()
     HSPsemanal()
     VX()
     UpdateCharR()
+
     // set interval to update graphics
     setInterval(() => {
       UpdateCharV()
