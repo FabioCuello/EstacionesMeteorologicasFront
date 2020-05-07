@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './navbar'
 import Table from './table/Table';
-import '../App.css';
-import '../bootstrap-social.css'
 import Graphic from './Graphic'
+import { TIME_UPDATE, APP_ORIGIN } from "../config/index"
 
 function App() {
 
@@ -14,7 +13,7 @@ function App() {
   async function UpdateCharR() {
     let UpdateCharRVector = []
     try {
-      const dataPointsJson = await fetch("http://34.219.130.100:3001/api/data/radiation")
+      const dataPointsJson = await fetch(`${APP_ORIGIN}/radiation`)
       const dataPoints = await dataPointsJson.json()
       dataPoints.map((data) => {
         UpdateCharRVector.push({
@@ -34,7 +33,7 @@ function App() {
   async function UpdateCharV() {
     let UpdateCharVVector = []
     try {
-      const dataPointsJson = await fetch("http://34.219.130.100:3001/api/data/wind")
+      const dataPointsJson = await fetch(`${APP_ORIGIN}/wind`)
       const dataPoints = await dataPointsJson.json()
       dataPoints.map((data) => {
         UpdateCharVVector.push({
@@ -55,7 +54,7 @@ function App() {
     let HSPsemanalVector = []
     var hoy = new Date();
     hoy = hoy.getDay()
-    const dataPointsJson = await fetch('http://34.219.130.100:3001/api/data/PanelEnergy')
+    const dataPointsJson = await fetch(`${APP_ORIGIN}/PanelEnergy`)
     const dataPoints = await dataPointsJson.json()
     for (var i = 0; i <= hoy; i++) {
       HSPsemanalVector.push({
@@ -70,7 +69,7 @@ function App() {
     let VXvector = []
     var hoy = new Date();
     hoy = hoy.getDay()
-    const dataPointsJson = await fetch('http://34.219.130.100:3001/api/data/emuEnergy')
+    const dataPointsJson = await fetch(`${APP_ORIGIN}/emuEnergy`)
     const dataPoints = await dataPointsJson.json()
 
     // --------
@@ -100,7 +99,7 @@ function App() {
       HSPsemanal()
       VX()
       UpdateCharR()
-    }, 15000);
+    }, TIME_UPDATE);
   }, [])
 
   return (

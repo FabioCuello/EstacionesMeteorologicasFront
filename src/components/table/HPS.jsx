@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
+import { TIME_UPDATE, APP_ORIGIN } from "../../config/index"
 
-
-var Data = [];
 var wind = [];
 var HSPS = [];
 class HPS extends Component {
@@ -37,7 +36,7 @@ class HPS extends Component {
     componentDidMount() {
         var updateData = async function () {
             try {
-                const dataPointsJson = await fetch('http://34.219.130.100:3001/HSP')
+                const dataPointsJson = await fetch(`${APP_ORIGIN}/HSP`)
                 const dataHSP = await dataPointsJson.json()
                 //poner un vector para almacenar las horas sol pico de cada día
                 var viento = localStorage.getItem('PV');
@@ -61,14 +60,13 @@ class HPS extends Component {
                 document.getElementById("total").innerHTML = total + " Wh/d";
                 document.getElementById("solar").innerHTML = solar + "%";
                 document.getElementById("eolico").innerHTML = eolico + "%";
-                Data = [];
             }
             catch (error) {
                 console.log("Ha ocurrido un error actualizando HSP, P.Eolico y Solar")
             }
         };
         setTimeout(function () { updateData() }, 1000);
-        setInterval(function () { updateData() }, 900000);
+        setInterval(function () { updateData() }, TIME_UPDATE);
     }
 }
 export default HPS;
