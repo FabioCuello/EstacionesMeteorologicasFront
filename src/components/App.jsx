@@ -95,7 +95,6 @@ function App() {
 
     // set interval to update graphics
     setInterval(() => {
-      console.log(APP_ORIGIN)
       UpdateCharV()
       HSPsemanal()
       VX()
